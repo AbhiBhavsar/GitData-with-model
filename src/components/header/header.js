@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import User from '../users/user';
 import '../../styles/main.scss';
 import './header.scss';
-import GitUserModel from '../../model/gitUserModel';
+import GitUserModel from '../../models/gitUserModel';
 
 class Header extends React.Component {
     onInputChange = (elem) => {
@@ -71,16 +71,14 @@ sortData = (userData, ele) => {
 /* ======================= DATA FETCHING LOGIC ================= */
 fetchUsers = (e) => {
     const { searchTerm } = this.state;
-        e.preventDefault();
-        // console.log("Fetching data");        
+        e.preventDefault();       
         axios.get(`https://api.github.com/search/users?q=${searchTerm}`)
-            .then((res) => {
-                if (res.data) {
-                    const response = res.data;
-                    const users = res.data.items;
-                    this.setState({ users, response, isFetching: false });
-                }
-            });
+            .then((resp) => {                
+                     new GitUserModel({
+                      ...resp.data,
+                      id: 1
+                  }).$save();
+            });            
     }
 
 fetchRepo = (uname) => {
@@ -95,6 +93,9 @@ fetchRepo = (uname) => {
 /* ======================= DATA FETCHING LOGIC ================= */
 
     render() {
+        /*eslint-disable*/
+        const { gitApiData } = this.props;
+        console.log('gitApiData', gitApiData); 
         return (
             <React.Fragment>
                 <div className="full-width">
@@ -141,8 +142,9 @@ fetchRepo = (uname) => {
 }
 
 const mapStateToProps = (state) => {
-    return {
-        gitApiData: GitUserModel.list().map(({ props }) => props)
+console.log(state);
+ return {
+        gitApiData: GitUserModel.list()
     };
 };
 

@@ -245,6 +245,7 @@ export class BaseModel {
    * @returns Array of instances.
    */
   static list(state = store.getState()) {
+    console.log('state', state);
     return state.models
       .filter(instance => {
         return instance && instance.resource === this.resource;
