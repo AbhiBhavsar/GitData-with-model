@@ -1,0 +1,17 @@
+$full-width: auto;
+$clear-padding: 0px 0px 0px 0px;
+$clear-margin: 0px 0px 0px 0px;
+@mixin position-center{  margin: 0px auto;}
+
+img{
+    height:120px;
+    width: 120px;
+}
+.card{
+    max-width: 640px;
+    @include position-center();
+}
+.card-img{
+    width: auto;
+    margin:15px 25px;
+}

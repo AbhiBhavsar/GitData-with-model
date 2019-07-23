@@ -1,4 +1,4 @@
-/* eslint-disable no-restricted-syntax,no-prototype-builtins,no-use-before-define */
+/* eslint-disable  */
 import {
   deleteAllInstances,
   deleteInstance,
@@ -8,7 +8,7 @@ import {
   saveAllInstancesOnTop
 } from '../actions/modelActions';
 import { INVALID_INSTANCE_CANNOT_SAVE } from '../utils/constant';
-import store from '../utils/store';
+import store from '../store/store';
 import { contains, isEmpty, keys } from '../utils/utils';
 
 /**

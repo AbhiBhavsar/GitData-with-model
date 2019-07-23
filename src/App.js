@@ -1,9 +1,10 @@
 import React, { PureComponent } from "react";
+import Header from './components/header/header';
 
 export class App extends PureComponent {
     render() {
         return (
-            <h5>TESTING TESTING!</h5>
+            <Header />
         );
     }
 }

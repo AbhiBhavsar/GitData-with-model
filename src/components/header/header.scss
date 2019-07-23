@@ -1,0 +1,24 @@
+$full-width: auto;
+$clear-padding: 0px 0px 0px 0px;
+$clear-margin: 0px 0px 0px 0px;
+@mixin position-center{  margin: 0px auto;}
+form >h5{
+    color:#fff;
+}
+
+.full-width{
+    width: $full-width;
+    padding: $clear-padding;
+    margin: $clear-margin;
+}
+
+form{
+    padding: 10px;
+    @include position-center();
+}
+
+.form-control, .btn{
+    border-radius: 0px;
+    margin: 5px;
+}
+

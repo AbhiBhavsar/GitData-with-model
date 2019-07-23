@@ -1,4 +1,5 @@
-import store from './store';
+/*eslint-disable */
+import store from '../store/store';
 
 export function isEmpty(obj) {
     return !obj || Object.keys(obj).length === 0;
