@@ -1,96 +1,88 @@
-# ES6 React Widget Components using Webpack
+# Minimal React Scaffold
 
+Simple React Scafold with Babel, Redux, Webpack, Sass, & Bootstrap.
+Also enabled with ES Lint.
 
-Simple and optimized React boilerplate. It includes: 
+## Getting Started
 
-- [x] React 16
-- [x] ECMAScript 6 and JSX support
-- [x] React Router v4
-- [x] Latest Webpack ~~(v.2.5.1)~~ (v.4.6.0) and Webpack Dev Server ~~(v.2.5.1)~~ (v.3.1.3)
-- [x] Hot Module Replacement using [react-hot-loader](https://github.com/gaearon/react-hot-loader)
-- [x] SASS support
-- [x] Automatic HTML generation
-- [x] Production Config
-- [x] Custom Babel Preset with Decorators, Class Properties, Rest/Spread operator support 
-- [x] ES6 Linting
-- [x] Redux (v.4.0.0) API integration
-- [x] React-Redux Form (v.1.16.8)
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
+### Prerequisites
 
-## Starting the dev server
+What things you need to install the software and how to install them
 
-Make sure you have **Node.js** installed.
+```
+Give examples
+```
 
-1. Run `npm install`
-2. Start the dev server using `npm start`
-3. Open [http://localhost:3000](http://localhost:3000)
+### Installing
 
+A step by step series of examples that tell you how to get a development env running
 
-## Available Commands
+Say what the step will be
 
-- `npm start` - start the dev server
-- `npm clean` - delete the dist folder
-- `npm run build` - create a production ready build in `dist` folder
-- `npm run lint` - execute an eslint check
-- `npm run deploy` - stop the forever server, execute a git pull and start the forever server again on the targeted server
+```
+Give the example
+```
 
+And repeat
 
-## Breaking down the Commands
+```
+until finished
+```
 
-- `npm start`
-    - Script: `"webpack-dev-server --mode development --progress --colors --open --hot --port 3000"`
-    - Script breakdown:
-        - `webpack-dev-server`: Runs webpack.config.js, creates the build and host the files on webpack development server.
-        - `--mode development`: Sets the webpack build mode to development.
-        - `--progress --colors`: Shows the progress of the build on the console with different colors for different assets.
-        - `--open`: Opens the default system browser.
-        - `--hot`: Activates the hot reload functionality where the browser itself reloads the component whenever the developer make any changes in the corresponding code.
-        - `--port 3000`: Targets the dev server and serve the distributable files on port 3000.
-        - Please note that `npm run clean` runs as before `npm start` which deletes the pre-existing dist folder from the project file system. 
-    
-- `npm run build`
-    - Script: `"npm run clean && webpack --mode production --progress --colors"`
-    - Script breakdown:
-        - `npm run clean`: Deletes the pre-existing dist folder from the project file system. 
-        - `webpack`: Runs webpack.config.js and creates the build.
-        - `--mode production`: Sets the webpack build mode to production.
-        - `--progress --colors`: Shows the progress of the build with different colors for different assets on the console.
+End with an example of getting some data out of the system or using it for a little demo
 
-- `npm run lint`
-    - Script: `"eslint --fix src"`
-    - Runs eslint and checks for any linting errors in the src folder.
-    - `--fix` flag fixes the linting errors whch can be auto fixed by eslint script.
-    - Please note, for this command you need eslint to be installed globally on your machine. To install, please run `npm install eslint -g`.
+## Running the tests
 
+Explain how to run the automated tests for this system
 
-## Webpack upgraded from v.2.5.1 to v4.6.0
+### Break down into end to end tests
 
-- Webpack 4 now guarantees you up to a 98% decrease in build time.
-- Take advantage of the modern ES6 syntax which results in a more cleaner and stable code.
-- Webpack 4 ships with a property called `mode` which allows you to easily set which environment you're working on, `development` and `production`. Each option has it's own advantages and usage.
-- Setting the `mode` to `development` allows you to focus on building by giving you the best development experience with features like:
-    - Tooling for browser debugging.
-    - Comments, detailed error messages and hints for development are enabled.
-    - Fast and optimized incremental rebuilds.
-- While setting `mode` to `production` offers you the best option and defaults needed for deploying your project such as:
-    - Optimizations to generate optimized bundles.
-    - Smaller output size.
-    - Exclusion of development-only code.
-- `javascript/auto` used to be the default module in webpack 3 but webpack 4 completely abstracted the JavaScript specificity from the code base to allow for this change so that users can specify the kind of module they want.
+Explain what these tests test and why
 
-- **Plugins and Optimizations:**
-    - The `CommonsChunkPlugin` was removed in webpack 4 and has been replaced with a set of defaults and API called `optimization.splitChunks` and `optimization.runtimeChunk`. This means you now get to have shared chunks automatically generated for you.
-    - `NoEmitOnErrorsPlugin` was deprecated and is now optimization.noEmitOnErrors. It's set to on by default in production mode.
-    - `ModuleConcatenationPlugin` was deprecated and is now `optimization.concatenateModules`. It's set to on by default in production mode.
-    - `NamedModulesPlugin` was deprecated and is now `optimization.namedModules`. It's set to on by default in production mode.
+```
+Give an example
+```
 
-- **Other updates:**
-    - Improve stats output alignment.
-    - Improve stats text output when all exports are used.
-    - Add `prefetched/preloaded` chunks and assets to stats text output.
-    - `UglifyJs` now caches and parallizes by default.
-    - Performance improvement for `RemoveParentModulesPlugin`.
-    - Script tags are no longer `text/javascript` and async as this are the default values (saves a few bytes).
-    - Persistent Caching.
+### And coding style tests
 
-- You can check out the full release log for webpack 4 [here](https://github.com/webpack/webpack/releases).
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+## Deployment
+
+Add additional notes about how to deploy this on a live system
+
+## Built With
+
+* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
+* [Maven](https://maven.apache.org/) - Dependency Management
+* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+
+## Contributing
+
+Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+
+## Authors
+
+* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* Hat tip to anyone whose code was used
+* Inspiration
+* etc
