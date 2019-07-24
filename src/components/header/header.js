@@ -88,9 +88,8 @@ class Header extends React.Component {
     /* ======================= DATA FETCHING LOGIC ================= */
 
     render() {
-        /*eslint-disable*/
-        const { gitApiData, gitUserData, gitReposData, total_count } = this.props;
-        console.log(`[Git Repos Data]:`, gitReposData);
+        const { gitUserData, gitReposData, totalCount } = this.props;
+        console.log(`[Git Repos Data]:`, gitUserData);
         return (
             <React.Fragment>
                 <div className="full-width">
@@ -99,7 +98,7 @@ class Header extends React.Component {
                             <form className="form-inline" onSubmit={e => this.fetchUsers(e)}>
                                 <h5>Sort By:</h5>
                                 <div className="form-group">
-                                    <select name="sortBy" className="form-control" onChange={(e) => this.sortData(gitUserData[0], e)}>
+                                    <select name="sortBy" className="form-control" onChange={e => this.sortData(gitUserData[0], e)}>
                                         <option value="" />
                                         <option value="nameAsc">Name(A-Z)</option>
                                         <option value="nameDsc">Name(Z-A)</option>
@@ -118,13 +117,13 @@ class Header extends React.Component {
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-lg-4 mx-auto">
-                            <h6>Total Results: {total_count}</h6>
+                            <h6>Total Results: {totalCount}</h6>
 
                             </div>
                         </div>
                         <div className="row col-lg-8 col-sm-12 mx-auto">
-                        {gitUserData.length > 0 && gitUserData.map(item => (
-                            gitUserData[0].map( (innerArrEle, innerIdx)=>(
+                        {gitUserData.length > 0 && gitUserData.map(() => (
+                            gitUserData[0].map(innerArrEle => (
                             <User
                                 key={innerArrEle.id}
                                 uniKey={innerArrEle.id}
@@ -132,7 +131,7 @@ class Header extends React.Component {
                                 profile={innerArrEle.url}
                                 avatar={innerArrEle.avatar_url}
                                 fetchRepo={this.fetchRepo}
-                                repos = {gitReposData}
+                                repos={gitReposData}
                                 />
                          ))
                           ))}
@@ -148,16 +147,16 @@ class Header extends React.Component {
 const mapStateToProps = (state) => {
     return {
         gitApiData: GitUserModel.list(),
-
-        total_count: GitUserModel.list().map((arrEle, index)=>{     // 1. Main Api Response
+ // 1. Main Api Response
+        total_count: GitUserModel.list().map((arrEle) => {    
             return arrEle.props.total_count;
             }),          
-
-        gitUserData: GitUserModel.list().map((arrEle, index)=>{     // 2. Actual Users Data
+// 2. Actual Users Data
+        gitUserData: GitUserModel.list().map((arrEle) => {     
                         return arrEle.props.items;
                         }),
-
-        gitReposData: GitReposModel.list()                          // 3. Each Users Repositories data.
+ // 3. Each Users Repositories data.
+        gitReposData: GitReposModel.list()                    
     };
 };
 
