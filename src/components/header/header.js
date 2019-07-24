@@ -5,6 +5,7 @@ import User from '../users/user';
 import '../../styles/main.scss';
 import './header.scss';
 import GitUserModel from '../../models/gitUserModel';
+import GitReposModel from '../../models/gitReposModel';
 
 class Header extends React.Component {
     onInputChange = (elem) => {
@@ -73,29 +74,23 @@ class Header extends React.Component {
         e.preventDefault();
         axios.get(`https://api.github.com/search/users?q=${searchTerm}`)
             .then((resp) => {
-                new GitUserModel({
-                    ...resp.data,
-                    id: 1
-                }).$save();
-            });
-            
+                new GitUserModel(resp.data).$save();
+            });  
     }
 
     fetchRepo = (uname) => {
         axios.get(`https://api.github.com/users/${uname}/repos`)
             .then((resp) => {
-                if (resp.data) {
-                    const repos = resp.data;
-                    this.setState({ repos });
-                }
+                GitReposModel.deleteAll();
+                GitReposModel.saveAll(resp.data.map(obj => new GitReposModel(obj)));
             });
     }
     /* ======================= DATA FETCHING LOGIC ================= */
 
     render() {
         /*eslint-disable*/
-        const { gitApiData, gitUserData } = this.props;
-        console.log(`[Git user Data]:`, gitUserData);
+        const { gitApiData, gitUserData, gitReposData, total_count } = this.props;
+        console.log(`[Git Repos Data]:`, gitReposData);
         return (
             <React.Fragment>
                 <div className="full-width">
@@ -104,7 +99,7 @@ class Header extends React.Component {
                             <form className="form-inline" onSubmit={e => this.fetchUsers(e)}>
                                 <h5>Sort By:</h5>
                                 <div className="form-group">
-                                    <select name="sortBy" className="form-control" onChange={() => this.sortData()}>
+                                    <select name="sortBy" className="form-control" onChange={(e) => this.sortData(gitUserData[0], e)}>
                                         <option value="" />
                                         <option value="nameAsc">Name(A-Z)</option>
                                         <option value="nameDsc">Name(Z-A)</option>
@@ -122,8 +117,8 @@ class Header extends React.Component {
                     {/* ====Total Count Display===== */}
                     <div className="container-fluid">
                         <div className="row">
-                            <div className="col-lg-3">
-                                <h6>Total Results:</h6>
+                            <div className="col-lg-4 mx-auto">
+                            <h6>Total Results: {total_count}</h6>
 
                             </div>
                         </div>
@@ -136,9 +131,8 @@ class Header extends React.Component {
                                 uname={innerArrEle.login}
                                 profile={innerArrEle.url}
                                 avatar={innerArrEle.avatar_url}
-                                // fetchRepo={this.fetchRepo}
-                                // repoName={repos.full_name}
-                                // repoLang={repos.language}
+                                fetchRepo={this.fetchRepo}
+                                repos = {gitReposData}
                                 />
                          ))
                           ))}
@@ -153,10 +147,17 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        gitApiData: GitUserModel.list(),    // 1. Main Api Response
+        gitApiData: GitUserModel.list(),
+
+        total_count: GitUserModel.list().map((arrEle, index)=>{     // 1. Main Api Response
+            return arrEle.props.total_count;
+            }),          
+
         gitUserData: GitUserModel.list().map((arrEle, index)=>{     // 2. Actual Users Data
                         return arrEle.props.items;
-                        })
+                        }),
+
+        gitReposData: GitReposModel.list()                          // 3. Each Users Repositories data.
     };
 };
 
