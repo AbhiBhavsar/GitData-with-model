@@ -124,7 +124,7 @@ class Header extends React.Component {
                         <div className="row col-lg-8 col-sm-12 mx-auto">
                         {gitUserData.length > 0 && gitUserData.map(() => (
                             gitUserData[0].map(innerArrEle => (
-                            <User
+                            <User // 1. need to handle collapse here.
                                 key={innerArrEle.id}
                                 uniKey={innerArrEle.id}
                                 uname={innerArrEle.login}

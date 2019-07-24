@@ -32,6 +32,7 @@ const user = (props) => {
                             <div ref={repoList} className="collapse" id={idStr}>
                                 <div className="card card-body">
                                     {repos.map((item, key) => (
+                                        // 1.check array from 0 if any array elemnt ahve the show class.
                                         <p key={key}>{item.props.name}</p>
                                     ))}
                                 </div>
