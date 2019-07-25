@@ -10,7 +10,7 @@ import GitReposModel from '../../models/gitReposModel';
 class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state = {  // Maintaining local state to check the user currently selected.
             selectedUserId: null
         };
     }
@@ -94,7 +94,7 @@ class Header extends React.Component {
     }
     /* ======================= DATA FETCHING LOGIC ================= */
 
-    handleSelectUser = (userId) => {
+    handleSelectUser = (userId) => { // function to get the userid of selected child
         this.setState({ selectedUserId: userId });
     }
 
@@ -137,7 +137,7 @@ class Header extends React.Component {
                         <div className="row col-lg-8 col-sm-12 mx-auto">
                         {gitUserData.length > 0 && gitUserData.map(() => (
                             gitUserData[0].map(innerArrEle => (
-                                
+
                             <User // 1. need to handle collapse here.
                                 key={innerArrEle.id}
                                 uniKey={innerArrEle.id}
@@ -146,8 +146,8 @@ class Header extends React.Component {
                                 avatar={innerArrEle.avatar_url}
                                 fetchRepo={this.fetchRepo}
                                 repos={gitReposData}
-                                handleUserDetailShow={this.handleSelectUser}
-                                isSelected={selectedUserId === innerArrEle.id}
+                                handleUserDetailShow={this.handleSelectUser} // passing function as a prop to child to get the id of selected user
+                                isSelected={selectedUserId === innerArrEle.id} // setting local state by comparing the selectedUser id to currrently rending user id.
                                 />
                                 ))
                             ))

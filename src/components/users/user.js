@@ -7,10 +7,11 @@ const user = (props) => {
         uname, profile, avatar, uniKey, repos, isSelected, handleUserDetailShow
     } = props;
     const idStr = `collapseExample-${uniKey}`;
+
     const performOnclickCheck = (e) => {
         if (!e.target.classList.contains('show')) {
            props.fetchRepo(uname); 
-           handleUserDetailShow(uniKey);     
+           handleUserDetailShow(uniKey); // sending the selected user id.
         }
          return null;
     };
@@ -37,7 +38,7 @@ const user = (props) => {
                                 onClick={performOnclickCheck}>
                                     Details
                             </button>
-                            {isSelected ? <div className="collapse" id={idStr}>
+                            {isSelected ? <div className="collapse" id={idStr}> {/* Checking if any other accordion is open using isSelected */}
                                 <div className="card card-body">
                                     {repos.map((item, key) => (
                                         // 1.check array from 0 if any array elemnt ahve the show class.
