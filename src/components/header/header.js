@@ -8,6 +8,13 @@ import GitUserModel from '../../models/gitUserModel';
 import GitReposModel from '../../models/gitReposModel';
 
 class Header extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedUserId: null
+        };
+    }
+
     onInputChange = (elem) => {
         this.setState({ searchTerm: elem.target.value });
         if (elem.key === 'Enter') {
@@ -87,9 +94,14 @@ class Header extends React.Component {
     }
     /* ======================= DATA FETCHING LOGIC ================= */
 
+    handleSelectUser = (userId) => {
+        this.setState({ selectedUserId: userId });
+    }
+
     render() {
         const { gitUserData, gitReposData, totalCount } = this.props;
-        console.log(`[Git Repos Data]:`, gitUserData);
+        const { selectedUserId } = this.state;
+       // console.log(`[Git Repos Data]:`, gitUserData);
         return (
             <React.Fragment>
                 <div className="full-width">
@@ -115,15 +127,17 @@ class Header extends React.Component {
                     </div>
                     {/* ====Total Count Display===== */}
                     <div className="container-fluid">
+                        
                         <div className="row">
                             <div className="col-lg-4 mx-auto">
                             <h6>Total Results: {totalCount}</h6>
-
                             </div>
                         </div>
+
                         <div className="row col-lg-8 col-sm-12 mx-auto">
                         {gitUserData.length > 0 && gitUserData.map(() => (
                             gitUserData[0].map(innerArrEle => (
+                                
                             <User // 1. need to handle collapse here.
                                 key={innerArrEle.id}
                                 uniKey={innerArrEle.id}
@@ -132,10 +146,14 @@ class Header extends React.Component {
                                 avatar={innerArrEle.avatar_url}
                                 fetchRepo={this.fetchRepo}
                                 repos={gitReposData}
+                                handleUserDetailShow={this.handleSelectUser}
+                                isSelected={selectedUserId === innerArrEle.id}
                                 />
-                         ))
-                          ))}
+                                ))
+                            ))
+                        }
                         </div>
+
                         {this.sortedUser}
                     </div>
                 </div>

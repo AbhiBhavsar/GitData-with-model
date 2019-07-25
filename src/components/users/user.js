@@ -3,11 +3,18 @@ import '../../styles/main.scss';
 import './user.scss';
 
 const user = (props) => {
-    const repoList = React.createRef();
     const {
-        uname, profile, avatar, uniKey, repos
+        uname, profile, avatar, uniKey, repos, isSelected, handleUserDetailShow
     } = props;
     const idStr = `collapseExample-${uniKey}`;
+    const performOnclickCheck = (e) => {
+        if (!e.target.classList.contains('show')) {
+           props.fetchRepo(uname); 
+           handleUserDetailShow(uniKey);     
+        }
+         return null;
+    };
+
     return (
         <div className="container-fluid ">
             <div className="card mb-3">
@@ -24,19 +31,20 @@ const user = (props) => {
                                 type="button"
                                 data-toggle="collapse"
                                 data-target={`#${idStr}`}
+                                id={`#${idStr}`}
                                 aria-expanded="false"
                                 aria-controls="collapseExample"
-                                onClick={() => !repoList.current.classList.contains('show') ? props.fetchRepo(uname) : null}>
+                                onClick={performOnclickCheck}>
                                     Details
                             </button>
-                            <div ref={repoList} className="collapse" id={idStr}>
+                            {isSelected ? <div className="collapse" id={idStr}>
                                 <div className="card card-body">
                                     {repos.map((item, key) => (
                                         // 1.check array from 0 if any array elemnt ahve the show class.
                                         <p key={key}>{item.props.name}</p>
                                     ))}
                                 </div>
-                            </div>
+                            </div>: null}
                         </div>
                     </div>
                 </div>
