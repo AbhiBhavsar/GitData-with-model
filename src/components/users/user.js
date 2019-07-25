@@ -10,10 +10,10 @@ const user = (props) => {
 
     const performOnclickCheck = (e) => {
         if (!e.target.classList.contains('show')) {
-           props.fetchRepo(uname); 
-           handleUserDetailShow(uniKey); // sending the selected user id.
+            props.fetchRepo(uname);
+            handleUserDetailShow(uniKey); // sending the selected user id.
         }
-         return null;
+        return null;
     };
 
     return (
@@ -36,16 +36,19 @@ const user = (props) => {
                                 aria-expanded="false"
                                 aria-controls="collapseExample"
                                 onClick={performOnclickCheck}>
-                                    Details
+                                Details
                             </button>
-                            {isSelected ? <div className="collapse" id={idStr}> {/* Checking if any other accordion is open using isSelected */}
+                            {/* Checking if any other accordion is open using isSelected */}
+                            {isSelected ?
+                            <div className="collapse" id={idStr}> 
                                 <div className="card card-body">
                                     {repos.map((item, key) => (
                                         // 1.check array from 0 if any array elemnt ahve the show class.
                                         <p key={key}>{item.props.name}</p>
                                     ))}
                                 </div>
-                            </div>: null}
+                            </div> : null
+                            }
                         </div>
                     </div>
                 </div>

@@ -10,7 +10,8 @@ import GitReposModel from '../../models/gitReposModel';
 class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {  // Maintaining local state to check the user currently selected.
+        // Maintaining local state to check the user currently selected.
+        this.state = {  
             selectedUserId: null
         };
     }
@@ -130,7 +131,7 @@ class Header extends React.Component {
                         
                         <div className="row">
                             <div className="col-lg-4 mx-auto">
-                            <h6>Total Results: {totalCount}</h6>
+                            <h6>{`Total Results: ${totalCount}`}</h6>
                             </div>
                         </div>
 
