@@ -146,7 +146,7 @@ class Header extends React.Component {
                                 profile={innerArrEle.url}
                                 avatar={innerArrEle.avatar_url}
                                 fetchRepo={this.fetchRepo}
-                                repos={gitReposData}
+                                // repos={gitReposData}
                                 handleUserDetailShow={this.handleSelectUser} // passing function as a prop to child to get the id of selected user
                                 isSelected={selectedUserId === innerArrEle.id} // setting local state by comparing the selectedUser id to currrently rending user id.
                                 />
