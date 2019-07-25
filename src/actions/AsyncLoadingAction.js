@@ -1,7 +1,8 @@
-import { dispatch } from '../util/utils';
-import { LOADING, SET_ERROR, SET_LOADING, SET_SUCCESS, RELOAD, UNSET_RELOAD, CLEAR_IDENTIFIER_FROM_STATE } from '../constants/general';
-​
-​
+import { dispatch } from '../utils/utils';
+import {
+     LOADING, SET_ERROR, SET_LOADING, SET_SUCCESS, RELOAD, UNSET_RELOAD, CLEAR_IDENTIFIER_FROM_STATE
+     } from '../utils/constant';
+
 export function executePromiseAction(promise, identifier) {
     return dispatch({
         type: `${identifier}/${LOADING}`,
@@ -9,7 +10,7 @@ export function executePromiseAction(promise, identifier) {
         meta: { identifier, }
     });
 }
-​
+
 /** Used to set the loading state of a particular component to loading. */
 export function setLoading(identifier) {
     dispatch({
@@ -17,7 +18,7 @@ export function setLoading(identifier) {
         meta: { identifier }
     });
 }
-​
+
 /** Used to set the loading state of a particular component to error. */
 export function setError(identifier) {
     dispatch({
@@ -25,7 +26,7 @@ export function setError(identifier) {
         meta: { identifier }
     });
 }
-​
+
 /** Used to set the loading state of a particular component to success. */
 export function setSuccess(identifier) {
     dispatch({
@@ -33,21 +34,21 @@ export function setSuccess(identifier) {
         meta: { identifier }
     });
 }
-​
+
 export function reload(identifier) {
     dispatch({
         type: `${identifier}/${RELOAD}`,
         identifier
     });
 }
-​
+
 export function unsetReload(identifier) {
     dispatch({
         type: `${identifier}/${UNSET_RELOAD}`,
         identifier
     });
 }
-​
+
 export function clearComponent(identifier) {
     dispatch({
         type: `${identifier}/${CLEAR_IDENTIFIER_FROM_STATE}`,

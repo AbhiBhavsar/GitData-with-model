@@ -2,10 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import User from '../users/user';
-import '../../styles/main.scss';
-import './header.scss';
+import Loading from '../loading/loading';
+import * as Async from './AsyncFunction';
 import GitUserModel from '../../models/gitUserModel';
 import GitReposModel from '../../models/gitReposModel';
+import '../../styles/main.scss';
+import './header.scss';
 
 class Header extends React.Component {
     constructor(props) {
@@ -100,7 +102,7 @@ class Header extends React.Component {
     }
 
     render() {
-        const { gitUserData, gitReposData, totalCount } = this.props;
+        const { gitUserData, totalCount } = this.props;
         const { selectedUserId } = this.state;
        // console.log(`[Git Repos Data]:`, gitUserData);
         return (
@@ -138,7 +140,10 @@ class Header extends React.Component {
                         <div className="row col-lg-8 col-sm-12 mx-auto">
                         {gitUserData.length > 0 && gitUserData.map(() => (
                             gitUserData[0].map(innerArrEle => (
-
+                                <Async
+                                identifier="HeaderComponent"
+                                promise={this.getPromise()}
+                                content={
                             <User // 1. need to handle collapse here.
                                 key={innerArrEle.id}
                                 uniKey={innerArrEle.id}
@@ -149,6 +154,9 @@ class Header extends React.Component {
                                 // repos={gitReposData}
                                 handleUserDetailShow={this.handleSelectUser} // passing function as a prop to child to get the id of selected user
                                 isSelected={selectedUserId === innerArrEle.id} // setting local state by comparing the selectedUser id to currrently rending user id.
+                                />}
+                                loader={<Loading />}
+                                error={<h3 className="text-center mt-5">Nothing to see here</h3>}
                                 />
                                 ))
                             ))

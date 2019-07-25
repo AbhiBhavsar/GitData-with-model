@@ -1,30 +1,29 @@
-import pickby from 'lodash.pickby';
-import store from './store';
-import { category } from '../constants/general';
-​
+import { pickBy } from 'lodash';
+import store from '../store/store';
+import { category } from './constant';
+
 export function isEmpty(obj) {
     return !obj || Object.keys(obj).length === 0;
 }
-​
+
 export function dispatch(action) {
     if ((action).type) {
         return store.dispatch((action));
     }
-​
     return store.dispatch(action);
 }
-​
+
 export function getQuery(querySet) {
     const query = [];
     Object.keys(querySet).forEach((key) => {
-        const selectedChoices = pickby(querySet[key]);
+        const selectedChoices = pickBy(querySet[key]);
         if (Object.keys(selectedChoices).length > 0) {
             query.push(`${key}=${Object.keys(selectedChoices).join(',')}`);
         }
     });
     return query.join('&');
 }
-​
+
 export const getAccountStatus = (status) => {
     switch (status) {
         case 'Pre-opportunity': return `In-pursuit`;
@@ -41,7 +40,7 @@ export const getAccountType = (type) => {
         default: return `New Business`;
     }
 };
-​
+
 export function getCategoryColor(cat) {
     let klass = '';
     switch (cat.toString().toLowerCase()) {
@@ -59,13 +58,13 @@ export function getCategoryColor(cat) {
     }
     return klass;
 }
-​
+
 export function getInitials(name) {
     let initials = name.match(/\b\w/g) || [];
     initials = ((initials.shift() || '') + (initials.pop() || '')).toUpperCase();
     return initials;
 }
-​
+
 export function getRandomColor() {
     const letters = '0123456789ABCDEF';
     let color = '#';
@@ -74,7 +73,7 @@ export function getRandomColor() {
     }
     return color;
 }
-​
+
 export function getFiscalYears() {
     const currentYear = new Date().getFullYear();
     const years = [];
@@ -84,7 +83,7 @@ export function getFiscalYears() {
     const fiscalYears = years.map(item => ({ label: 'FY' + `${item}`.substring(2, item.length), value: `${item}` }));
     return fiscalYears;
 }
-​
+
 export function getFiscalQuarters() {
     return [
         { label: 'Q1', value: 'Q1' },
@@ -93,7 +92,7 @@ export function getFiscalQuarters() {
         { label: 'Q4', value: 'Q4' }
     ];
 }
-​
+
 export function getTopics() {
     return [
         {
@@ -148,7 +147,7 @@ export function getTopics() {
         }
     ];
 }
-​
+
 export function containsPermission(permission) {
     const AUTH = process.env.AUTH;
     if (AUTH !== null && typeof AUTH !== 'undefined' && AUTH !== 'undefined') {
@@ -163,8 +162,7 @@ export function containsPermission(permission) {
     }
     return true;
 }
-​
-​
+
 export function getLoggedInUser() {
     let userData = localStorage.getItem('user');
     if (userData) {
@@ -180,11 +178,11 @@ export function getLoggedInUser() {
     }
     return userData;
 }
-​
+
 export function getPromiseOrData(obj, promise) {
     return obj && Object.keys(obj).length > 0 ? new Promise(r => r({ data: obj })) : promise;
 }
-​
+
 export function getShortName(str) {
     const arr = str.toLowerCase().split(' ');
     arr[arr.length - 1] = arr[arr.length - 1][0] + '.';
@@ -192,7 +190,7 @@ export function getShortName(str) {
         word.charAt(0).toUpperCase() + word.slice(1)
     )).join(' ');
 }
-​
+
 export function opportunityPlannerHeadings() {
     return [{
         label: 'PROSPECTING',
@@ -216,12 +214,12 @@ export function opportunityPlannerHeadings() {
     }
     ];
 }
-​
+
 export function addCommas(str) {
     const string = (str || '').toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,');
     return string;
 }
-​
+
 export function reasonsForDisqualification() {
     return [{
         id: 'Wrong Timing',
@@ -257,7 +255,7 @@ export function reasonsForDisqualification() {
     }
 ];
 }
-​
+
 export function typeOptions() {
     return [{
         id: 'New Buisness',
@@ -269,7 +267,7 @@ export function typeOptions() {
     }
 ];
 }
-​
+
 export function sentimentOptions() {
     return [{
         id: 'Positive',

@@ -1,13 +1,24 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { isEmpty } from '../../util/utils';
-import { executePromiseAction, unsetReload, setError, setLoading } from '../../action/loadingActions';
+import { isEmpty } from '../../utils/AsyncUtil';
+import { 
+    executePromiseAction, unsetReload, setError, setLoading 
+} from '../../actions/AsyncLoadingAction';
 
 class AsyncImpl extends React.PureComponent {
+    Loader;
+    
+    Error;
+    
+    Content;
+    
+    resp;
+    
     componentWillMount() {
         this.executePromise(this.props.promise);
         this.parseProps();
     }
+    
     componentWillReceiveProps(nextProps) {
         this.parseProps(nextProps);
         if (nextProps.reload) {
@@ -23,11 +34,6 @@ class AsyncImpl extends React.PureComponent {
     unsetReload = (identifier) => {
         unsetReload(identifier);
     };
-
-    Loader;
-    Error;
-    Content;
-    resp;
 
     /** Initializes the Loader, Error and Content JSX. */
     parseProps = ({ content, error, loader } = this.props) => {
@@ -102,4 +108,4 @@ export function mapStateToProps(state, { identifier, initialState }) {
     };
 }
 
-export const Async = connect(mapStateToProps, null, null, { withRef: true })(AsyncImpl);
+export const Async = connect(mapStateToProps, null, null, { forwardRef: true })(AsyncImpl);

@@ -18,6 +18,7 @@ export const INVALID_INSTANCE_CANNOT_SAVE = 'INVALID_INSTANCE_CANNOT_SAVE';
 export const HIDE_MODAL = 'HIDE_MODAL';
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const SAVE_ALL_INSTANCES_ON_TOP = 'SAVE_ALL_INSTANCES_ON_TOP';
+export const CLEAR_IDENTIFIER_FROM_STATE = 'CLEAR_IDENTIFIER_FROM_STATE';
 
 // header icon click actions
 export const Icons = {
